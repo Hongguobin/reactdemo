@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>React基础部分</title>
+    <script src="./js/react.js"></script>
+    <script src="./js/react-dom.js"></script>
+    <script src="./js/browser.min.js"></script>
+  </head>
+
+  <body>
+    <div id="reactContainer"></div>
+    <script type="text/babel">
+      // =>生命周期
+      // mounting
+      // updating
+      // unmounting
+      // componentWillMount()
+      // componentDidMount()
+      // componentWillUpdate()
+      // componentDidUpdate()
+      // componentWillUnmount()
+      var TextBoxComponent = React.createClass({
+        getInitialState: function() {
+          return { opacity: 1.0 }
+        },
+
+        componentDidMount: function() {
+          setInterval(
+            function() {
+              var opacity = this.state.opacity
+              opacity -= 0.05
+              if (opacity < 0.1) {
+                opacity = 1.0
+              }
+              this.setState({
+                opacity: opacity
+              })
+            }.bind(this),
+            100
+          )
+        },
+        
+        render: function() {
+          return (
+            <div style={{ opacity: this.state.opacity }}>
+              <h2>{this.props.name}</h2>
+            </div>
+          )
+        }
+      })
+      ReactDOM.render(
+        <TextBoxComponent name="React subject" />,
+        document.getElementById('reactContainer')
+      )
+    </script>
+  </body>
+</html>
